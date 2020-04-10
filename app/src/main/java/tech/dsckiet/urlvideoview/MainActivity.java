@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+        PlayerUiController playerUiController = youTubePlayerView.getPlayerUiController();
 
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
             @Override
@@ -24,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
                 youTubePlayer.loadVideo(videoId, 0);
             }
         });
+
+        playerUiController.setVideoTitle("Title");
 
         getLifecycle().addObserver(youTubePlayerView);
     }

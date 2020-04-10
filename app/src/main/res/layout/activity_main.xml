@@ -11,9 +11,8 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/cardview_selector"
-        android:layout_margin="8dp"
         app:cardElevation="6dp"
+        android:background="@drawable/cardview_selector"
         app:cardCornerRadius="6dp">
 
     <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -25,7 +24,6 @@
         app:showSeekBar="true"
         app:showVideoDuration="true"
         app:showVideoCurrentTime="true"
-
         app:showFullScreenButton="true" />
 
     </androidx.cardview.widget.CardView>
