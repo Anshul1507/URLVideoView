@@ -1,30 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
     tools:context=".MainActivity">
 
-    <androidx.cardview.widget.CardView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:cardElevation="6dp"
-        android:background="@drawable/cardview_selector"
-        app:cardCornerRadius="6dp">
+        android:layout_height="match_parent">
 
-    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-        android:id="@+id/youtube_player_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:autoPlay="false"
-        app:showYouTubeButton="false"
-        app:showSeekBar="true"
-        app:showVideoDuration="true"
-        app:showVideoCurrentTime="true"
-        app:showFullScreenButton="true" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/cardview_selector"
+            app:cardCornerRadius="2dp"
+            app:cardElevation="6dp">
 
-    </androidx.cardview.widget.CardView>
+            <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+                android:id="@+id/youtube_player_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:autoPlay="false"
+                app:showFullScreenButton="true"
+                app:showSeekBar="true"
+                app:showVideoCurrentTime="true"
+                app:showVideoDuration="true"
+                app:showYouTubeButton="false" />
+
+        </androidx.cardview.widget.CardView>
+    </ScrollView>
 </LinearLayout>
