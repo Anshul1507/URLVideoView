@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.ui.PlayerUiController;
 
 public class MainActivity extends AppCompatActivity {
 
