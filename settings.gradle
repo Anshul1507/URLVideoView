@@ -1,0 +1,2 @@
+rootProject.name='URL Video View'
+include ':app'
