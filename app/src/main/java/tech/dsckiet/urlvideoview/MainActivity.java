@@ -1,40 +1,29 @@
 package tech.dsckiet.urlvideoview;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.app.ProgressDialog;
-import android.graphics.PixelFormat;
-import android.net.Uri;
 import android.os.Bundle;
-import android.widget.MediaController;
-import android.widget.VideoView;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ProgressDialog bar;
-    private String path="https://videocdn.bodybuilding.com/video/mp4/62000/62792m.mp4";
-    private MediaController ctlr;
-    private VideoView videoView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFormat(PixelFormat.TRANSLUCENT);
         setContentView(R.layout.activity_main);
-        bar=new ProgressDialog(MainActivity.this);
-        bar.setTitle("Connecting server");
-        bar.setMessage("Please Wait... ");
-        bar.setCancelable(false);
-        bar.show();
-        if(bar.isShowing()) {
-            videoView = findViewById(R.id.vv);
-            Uri uri = Uri.parse(path);
-            videoView.setVideoURI(uri);
-            videoView.start();
-            ctlr = new MediaController(this);
-            ctlr.setMediaPlayer(videoView);
-            videoView.setMediaController(ctlr);
-            videoView.requestFocus();
-        }
-        bar.dismiss();
+
+        YouTubePlayerView youTubePlayerView = findViewById(R.id.youtube_player_view);
+
+        youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onReady(@NonNull YouTubePlayer youTubePlayer) {
+                String videoId = "nQdm4LCNr9s";
+                youTubePlayer.loadVideo(videoId, 0);
+            }
+        });
+
+        getLifecycle().addObserver(youTubePlayerView);
     }
 }
