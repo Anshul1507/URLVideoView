@@ -4,13 +4,13 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener;
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView;
@@ -31,9 +31,16 @@ public class MainActivity extends AppCompatActivity {
 
          youTubePlayerView = findViewById(R.id.youtube_player_view);
          playerUiController = youTubePlayerView.getPlayerUiController();
-
         //for loading video into player
         youTubePlayerView.addYouTubePlayerListener(new AbstractYouTubePlayerListener() {
+            @Override
+            public void onStateChange(YouTubePlayer youTubePlayer, PlayerConstants.PlayerState state) {
+                super.onStateChange(youTubePlayer, state);
+                if(state == PlayerConstants.PlayerState.ENDED){
+                    Toast.makeText(MainActivity.this,"Video Ended",Toast.LENGTH_SHORT).show();
+                }
+            }
+
             @Override
             public void onReady(@NonNull YouTubePlayer youTubePlayer) {
                 String videoId = "nQdm4LCNr9s";
@@ -49,11 +56,12 @@ public class MainActivity extends AppCompatActivity {
         Log.i(TAG, "Screen: " + width + "x" + height);
 
         //for initial youtube player screen
-        youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,400));
+        youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,(width*9)/16));
+        Log.i(TAG, "onCreate: height: " + (height*9)/16);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         //for setting title in player UI
-        playerUiController.setVideoTitle("Title");
+//        playerUiController.setVideoTitle("Title");
 
         //for action of full screen button in player UI
         playerUiController.setFullScreenButtonClickListener(new View.OnClickListener() {
@@ -68,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 }else{
                     portrait = true;
                     setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-                    youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,400));
+                    youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,(width*9)/16));
                 }
             }
         });
@@ -81,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         if(getRequestedOrientation() == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-            youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,400));
+            youTubePlayerView.setLayoutParams(new FrameLayout.LayoutParams(width,(width*9)/16));
         }else{
             Toast.makeText(this, "Back Button pressed", Toast.LENGTH_SHORT).show();
             super.onBackPressed();
